@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<macromedia-extension
+	 name="Slice Modifier"
+	 version="1.0.0"
+	 type="command"
+	 locked="false"
+	 mxiversion="2.0.0"
+	 xmanversion="2.0.0">
+
+	<author name="littlebusters" />
+
+	<products>
+		<product name="Fireworks" version="9" primary="true" />
+	</products>
+
+	<update method="directlink" url="http://creative-tweet.net/tools/slice_modifier/slice_modifier_update.xml" />
+
+	<description>
+	<![CDATA[
+スライス名の変更や、複数スライスへの接頭辞・接尾辞・連番の付加、スライス色の変更ができます。	]]>
+	</description>
+
+	<ui-access>
+	<![CDATA[
+コマンド -> Slice Modifier
+	]]>
+	</ui-access>
+
+	<license-agreement>
+	<![CDATA[
+この拡張機能はMITライセンスのフリーウェアです。
+拡張機能が原因で発生したトラブルなどは責任を負いかねますので、自己責任でお使いください。
+
+(c)creative tweet. http://creative-tweet.net
+	]]>
+	</license-agreement>
+
+	<files>
+		<file source="Slice Modifier.jsf" destination="$fireworksuser/Commands/" />
+	</files>
+
+	<configuration-changes>
+	</configuration-changes>
+	<signatures />
+
+</macromedia-extension>

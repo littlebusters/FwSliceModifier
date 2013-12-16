@@ -1,0 +1,97 @@
+// Fireworks Extension: Commands
+// Change of Slice Name
+// version: 1.0
+// auther: @littlebusters
+// license: MIT
+
+(function() {
+
+	var s = fw.selection;
+	if ( !s.length ) return false;
+
+	var inputStr = prompt( 'Enter the Slice Name:\n[Options]\n-o: Add Order, -p: Add Prefix, -s: Add Suffix, -c: Change Slice Color', s[0].baseName || '' );
+	if ( !inputStr ) return false;
+
+	var options = inputStr.split( ' ' );
+	var sliceName = options[0];
+	var ordering = false;
+	var prefixing = false;
+	var suffixing = false;
+	var coloring  = false;
+	var digit = 1;
+	var prefix = '';
+	var suffix = '';
+	var color = '';
+
+	for ( var i = 1; i < options.length; i++ ) {
+		switch ( options[i] ) {
+			case '-o':
+				ordering = true;
+				if ( options[++i] ) {
+					digit = options[i].length;
+				} else {
+					digit = String( s.length ).length;
+				}
+				break;
+			case '-p':
+				prefixing = true;
+				if ( options[++i] ) {
+					prefix = options[i];
+				}
+				break;
+			case '-s':
+				suffixig = true;
+				if ( options[++i] ) {
+					suffix = options[i];
+				}
+				break;
+			case '-c':
+				coloring = true;
+				if ( options[++i] ) {
+					color = options[i];
+				} else {
+					color = '#00ff00';
+				}
+				break;
+			default:
+				break;
+		}
+	}
+
+	var d = fw.getDocumentDOM();
+	var docName = d.docTitleWithoutExtension.replace( '.fw', '' );
+	var optionState = false;
+	var orderNo = 1;
+
+	for ( var i = s.length - 1; i >= 0; i-- ) {
+		if ( String( s[i] ) == '[object SliceHotspot]' ) {
+			fw.selection = s[i];
+			optionState = ( ordering || prefixing || suffixing || coloring );
+
+			if ( s[i].baseName && !options[0] && optionState ) {
+				sliceName = s[i].baseName;
+			} else if ( !s[i].baseName && !options[0] && optionState ) {
+				sliceName = docName + ( i + 1 );
+			}
+			d.setSliceFilename( prefix + sliceName + getDigit( digit ) + suffix );
+			if ( coloring ) s[i].color = color;
+			if ( !ordering && !prefixing && !suffixing && !coloring ) break;
+		}
+	};
+
+	fw.selection = s;
+	return true;
+
+	function getDigit( _digit ) {
+		var zero = '';
+		var crntDigit = String( orderNo + 1 ).length - 0;
+
+		for ( var i = _digit - crntDigit; i > 0; i-- ) {
+			zero += '0';
+		};
+		if ( ordering ) zero = zero + ( orderNo++ );
+
+		return zero;
+	}
+	
+})();
