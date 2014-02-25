@@ -1,6 +1,6 @@
 // Fireworks Extension: Commands
 // Change of Slice Name
-// version: 1.0
+// version: 1.0.1
 // auther: @littlebusters
 // license: MIT
 
@@ -40,7 +40,7 @@
 				}
 				break;
 			case '-s':
-				suffixig = true;
+				suffixing = true;
 				if ( options[++i] ) {
 					suffix = options[i];
 				}
